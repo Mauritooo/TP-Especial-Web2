@@ -47,8 +47,13 @@ class ProductController{
 
     function updateProduct(){ 
         $this->checkLoggedIn();
-
-        $this->model->updateProductFromDB($_POST['newName'],$_POST['newDescription'],$_POST['newPrice'],$_POST['id'],$_POST['newImage']);    
+        //NO ESTA LEVANTANDO EL ID!!!
+        $id = 39;
+        $nombre ='cacho';
+        $descripcion = 'cacho';
+        $precio = 123;
+        $imagen = 'asd';
+        $this->model->updateProductFromDB($_POST['id'],$_POST['newName'],$_POST['newDescription'],$_POST['newPrice'],$_POST['newImage']);    
         $this->view->showHomeLocation();
     }
 

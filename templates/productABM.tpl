@@ -10,7 +10,7 @@
         <input type="text" name="nombre" id="nombre" placeholder="nombre del producto" value="">
         <input type="text" name="descripcion" id="descripcion" placeholder="descripcion del producto" value="">
         <input type="number" name="precio" id="precio" placeholder="precio del producto" value="">
-        <input type="text" name="image" id="image" placeholder="imagen del producto" value="">
+        <input type="text" name="image" id="image" placeholder="url de la imagen" value="">
         <input type="number" name="categoria" id="categoria" placeholder="categoria a la que pertenece el producto" value="">
         <input type="submit" class="btn btn-primary" value="Agregar">
     </form>

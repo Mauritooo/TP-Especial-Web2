@@ -34,9 +34,9 @@ switch ($params[0]) {
     case 'logout': 
         $loginController->logout(); 
         break;            
-    //case 'register':
-        //$loginController->register(); //usar solo para agregar usuarios
-       // break;
+    case 'register':
+        $loginController->register(); //usar solo para agregar usuarios
+        break;
     case 'userRegister':
         $loginController->userRegister();
         break;
@@ -47,6 +47,7 @@ switch ($params[0]) {
         $productController->deleteProduct($params[1]); 
         break;
     case 'updateProduct': 
+        
         $productController->updateProduct();
             break;
     case 'viewProduct': 

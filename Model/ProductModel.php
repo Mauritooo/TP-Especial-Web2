@@ -34,9 +34,10 @@ class ProductModel{
         return $producto;
     }
     
-    function updateProductFromDB($nombre,$descripcion,$precio,$id, $imagen){
+    function updateProductFromDB($id, $nombre,$descripcion,$precio, $imagen){
+      //ESTO ANDA PERFECTO EL ERROR ESTA MAS ARRIBA
         $sentencia = $this->db->prepare("UPDATE productos SET nombre=?, descripcion=?, precio=?, imagen=? WHERE id_producto=?");
-        $sentencia->execute(array($nombre,$descripcion,$precio,$id, $imagen));
+        $sentencia->execute(array($nombre,$descripcion,$precio, $imagen, $id));
     }
 
     function getProductsWithCategory() { //retorna productos y categorias.

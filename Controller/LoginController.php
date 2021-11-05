@@ -13,11 +13,11 @@ class LoginController{
         $this->model = new UserModel();
         $this->view = new LoginView();
     }
-/*
+
     function register(){
         $this->view->showRegister();
     }
-*/
+
     function login(){
         $this->view->showLogin();
     }
