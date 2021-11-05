@@ -1,0 +1,32 @@
+.imagen{
+    width: 10%;
+    height: 10%;
+}
+
+.contenedor-imagen-categoria{
+    width: 10%;
+    height: 10%;
+    display: none;
+}
+
+.contenedor-general{
+    display: flex;
+    align-items: center;
+}
+
+.contenedor-categoria{
+    display: none;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+img.imagen{
+    width: 10%;
+    height: 10%;
+    image-resolution: 10%;
+}
+
+ul{
+    font-family: 'Courier New', Courier, monospace;
+    font-size: large;
+}
