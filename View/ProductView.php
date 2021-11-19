@@ -10,16 +10,18 @@ class ProductView{
         $this->smarty = new Smarty();
     }
 
-    function showProducts($productosConCategoria){
+    function showProducts($productosConCategoria,$usuario=""){
+        $this->smarty->assign('usuario',$usuario);
         $this->smarty->assign('titulo','Lista de Productos');
         $this->smarty->assign('productosConCategoria',$productosConCategoria);
-        $this->smarty->display('templates/product.tpl');
+        $this->smarty->display('templates/Products/products.tpl');
     }//product
     
-    function showProductsABM($productosConCategoria){
+    function showProductsABM($productosConCategoria,$usuario=""){
+        $this->smarty->assign('usuario',$usuario);
         $this->smarty->assign('titulo','Lista de Productos para Administrador');
         $this->smarty->assign('productosConCategoria',$productosConCategoria);
-        $this->smarty->display('templates/productABM.tpl');
+        $this->smarty->display('templates/Products/productsABM.tpl');
     }
 
     function message($error){
@@ -28,10 +30,10 @@ class ProductView{
     }
     function showProduct($producto){
         $this->smarty->assign('producto',$producto);
-        $this->smarty->display('templates/productView.tpl');
+        $this->smarty->display('templates/Products/productView.tpl');
     }
 
-    function showHomeLocation(){
+    public function showHomeLocation(){
         header("Location: ".BASE_URL."home");
     }
 

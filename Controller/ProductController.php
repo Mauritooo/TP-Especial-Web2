@@ -2,16 +2,19 @@
 
 require_once "./Model/ProductModel.php";
 require_once "./View/ProductView.php";
+require_once "./Controller/LoginController.php";
 
 class ProductController{
 
     private $model;
     private $view;
+    private $controller;
 
     function __construct()
     {
         $this->model = new ProductModel();  
         $this->view = new ProductView();
+        $this->controller = new LoginController();
     }
 
     function showHome(){
@@ -20,9 +23,9 @@ class ProductController{
 
         $productosConCategoria = $this->model->getProductsWithCategory();
         if($logueado){
-            $this->view->showProductsABM($productosConCategoria);
+            $this->view->showProductsABM($productosConCategoria,$this->controller->getSession());
         }else{
-            $this->view->showProducts($productosConCategoria);
+            $this->view->showProducts($productosConCategoria,$this->controller->getSession());
         }
     }
 
@@ -61,6 +64,7 @@ class ProductController{
 
     function checkLoggedIn(){
         session_start();
+
         if(!isset($_SESSION["username"])){
             //$this->view->showLoginLocation();
             return false;

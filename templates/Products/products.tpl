@@ -1,5 +1,10 @@
 {include file="templates/header.tpl"}
-
+{if $usuario != ""}
+    <h1>Bienvenido: {$usuario}!</h1>
+{else}
+    <h1>Bienvenido: Anonimo!</h1>
+{/if}
+    
 <a class="btn btn-success" href="register">register</a>
 <a class="btn btn-danger" href="logout">logout</a>
 <a class="btn btn-primary" href="login">login</a>
@@ -11,7 +16,7 @@
     {foreach from=$productosConCategoria item=$producto}
 
         <div>
-            <img class="imagen" src="{$producto->imagen}" alt="cosa">
+            <img class="imagen" src="{$producto->imagen}" alt="{$producto->nombre}">
         </div>
         
         <ul>        

@@ -9,10 +9,12 @@ class LoginController{
     private $model;
     private $view;
     private $productView;
+
     function __construct()
     {
         $this->model = new UserModel();
         $this->view = new LoginView();
+        $this->productView = new ProductView();
     }
 
     function register(){
@@ -34,11 +36,14 @@ class LoginController{
                 
                 session_start();
                 $_SESSION['username'] = $userLog->username;
-                
+                $_SESSION['permisoDeAdmin'] = $userLog->admin; //guardo en la sesion si soy admin 
+
                 $this->view->showHome();
             }else{
                 $this->view->showLogin('Acceso Denegado');
             }
+        }else{
+            $this->view->showLogin('Debe Ingresar sus Datos para Loguearse o Registrarse');
         }
     }
     
@@ -47,10 +52,16 @@ class LoginController{
         if(!empty($_POST['user']) && !empty($_POST['password'])){
             $user = $_POST['user'];
             $password = $_POST['password'];
-
+            //inicio sesion.
+            session_start();
+            
+            $_SESSION['username'] = $user;
+            $_SESSION['permisoDeAdmin'] = 0;
             $this->model->setUser($user,password_hash($password, PASSWORD_BCRYPT));
             
-            $this->view->showLogin('Usuario Registrado con exito!');
+            $this->view->showHome();
+            }else{
+                $this->view->message('Debe Ingresar sus Datos');
             }
         }
     
@@ -68,6 +79,7 @@ class LoginController{
         $this->checkLoggedIn();
         $this->model->deleteUserFromDB($userName);
         $this->view->showLogin('Se elimino con exito el Usuario!');
+        $this->productView->showHomeLocation();
     }
 
     function usersView(){
@@ -82,8 +94,18 @@ class LoginController{
     }
 
     function logout(){
-        session_start();
+        if($this->checkLoggedIn()){
         session_destroy();
         $this->view->showLogin('Se ha deslogueado con exito!');
+        }else{
+            $this->productView->showHomeLocation();
+        }
+
+    }
+    function getSession(){
+        if(isset($_SESSION["username"]))
+            return $_SESSION["username"];
+        else
+            return "";
     }
 }

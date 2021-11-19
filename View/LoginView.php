@@ -28,6 +28,7 @@ class LoginView{
 
     function showUsers($users){
         $this->smarty->assign('titulo','Lista de Usuarios Registrados');
+        $this->smarty->assign('myUser',$_SESSION['permisoDeAdmin']);
         $this->smarty->assign('users',$users);
         $this->smarty->display('templates/usersView.tpl');
     }

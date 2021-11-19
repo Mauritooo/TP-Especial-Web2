@@ -1,4 +1,5 @@
 {include file="templates/header.tpl"}
+<h1>Bienvenido: {$usuario}!</h1>
 
 <a class="btn btn-danger" href="logout">logout</a>
 <a class="btn btn-warning" href="usersView">Users</a>
@@ -40,7 +41,7 @@
             <li>Categoria: {$producto->categoria}</li> 
             
             <div>
-                <img class="imagen" src="{$producto->imagen}" alt="cosa">
+                <img class="imagen" src="{$producto->imagen}" alt={$producto->nombre}>
             </div>
 
             <a class="btn btn-primary" href="viewProduct/{$producto->id_producto}">ver</a>

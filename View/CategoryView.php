@@ -15,15 +15,14 @@ class CategoryView{
         $this->smarty->assign('titulo', 'Productos de la Categoria');
         $this->smarty->assign('categoria',$categoriaDeProductos);
         //var_dump($categoriaDeProductos);
-        $this->smarty->display('templates/categoryView.tpl');//
+        $this->smarty->display('templates/Categories/categoryView.tpl');//
     }
 
     function showCategories($categorias){
         //muestra todos los productos de una categoria pasada por parametro
         $this->smarty->assign('titulo', 'Lista de Categorias');
         $this->smarty->assign('categorias',$categorias);
-        
-        $this->smarty->display('templates/categories.tpl');
+        $this->smarty->display('templates/Categories/categories.tpl');
     }
 
 }

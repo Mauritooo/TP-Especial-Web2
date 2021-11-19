@@ -16,7 +16,7 @@ class UserModel{
     }
 
     function setUser($user,$password){
-        $query = $this->db->prepare('INSERT INTO usuarios( username, password, levelaccess) VALUES (? , ?, ?)');
+        $query = $this->db->prepare('INSERT INTO usuarios( username, password, admin) VALUES (? , ?, ?)');
         $query->execute([$user,$password, 0]);
     }
 
@@ -26,9 +26,9 @@ class UserModel{
     }
 
     function getUsers(){
-        $admin = '1';
-        $sentencia = $this->db->prepare('SELECT * FROM usuarios WHERE admin != ?');
-        $sentencia->execute([$admin]);
+        $superUser = 'mauro';
+        $sentencia = $this->db->prepare('SELECT * FROM usuarios WHERE username != ?');
+        $sentencia->execute([$superUser]);
         return $sentencia->fetchAll(PDO::FETCH_OBJ);
     }
 
