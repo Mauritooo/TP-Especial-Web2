@@ -4,14 +4,16 @@
 <a class="btn btn-danger" href="logout">logout</a>
 <a class="btn btn-primary" href="login">login</a>
 <a class="btn btn-dark" href="viewCategories">Ver Categorias</a>
-
+<h2> POR FAVOR INICIE SESION O REGISTRESE PARA ACCEDER A MAS OPCIONES<h2>
     <h1>{$titulo}</h1>
 
+    
     {foreach from=$productosConCategoria item=$producto}
 
         <div>
             <img class="imagen" src="{$producto->imagen}" alt="cosa">
         </div>
+        
         <ul>        
                 <li>Id: {$producto->id_producto}</li>
                 <li>Nombre: {$producto->nombre} </li>
@@ -19,11 +21,11 @@
                 <li>Precio: ${$producto->precio}</li> 
                 <li>Categoria: {$producto->categoria}</li> 
         </ul>
-        </div>
+        
         <div>
-        <a class="btn btn-primary" href="viewProduct/{$producto->id_producto}">ver</a>    
+            <a class="btn btn-primary" href="viewProduct/{$producto->id_producto}">ver</a>    
         </div>
-        </div>
+        
     {/foreach}
 
 {include file="templates/footer.tpl"}

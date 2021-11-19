@@ -35,8 +35,8 @@ class ProductController{
         
     }
 
-    function pageNotFound($error = null){
-        $this->view->notFound($error);
+    function showMessage($error = null){
+        $this->view->message($error);
     }
     function deleteProduct($id){
         $this->checkLoggedIn();
@@ -47,12 +47,7 @@ class ProductController{
 
     function updateProduct(){ 
         $this->checkLoggedIn();
-        //NO ESTA LEVANTANDO EL ID!!!
-        $id = 39;
-        $nombre ='cacho';
-        $descripcion = 'cacho';
-        $precio = 123;
-        $imagen = 'asd';
+    
         $this->model->updateProductFromDB($_POST['id'],$_POST['newName'],$_POST['newDescription'],$_POST['newPrice'],$_POST['newImage']);    
         $this->view->showHomeLocation();
     }
@@ -66,7 +61,6 @@ class ProductController{
 
     function checkLoggedIn(){
         session_start();
-
         if(!isset($_SESSION["username"])){
             //$this->view->showLoginLocation();
             return false;

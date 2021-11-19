@@ -12,8 +12,8 @@ class ProductModel{
     function getProducts(){ //retorna solo productos
         $sentencia = $this->db->prepare( "select * from productos");
         $sentencia->execute();
-        $productos = $sentencia->fetchAll(PDO::FETCH_OBJ);
-        return $productos;
+        return $sentencia->fetchAll(PDO::FETCH_OBJ);
+        
     }
 
     function setProduct($nombre,$descripcion, $precio, $categoria, $imagen){
@@ -30,8 +30,7 @@ class ProductModel{
         $sentencia = $this->db->prepare( "SELECT productos.*, categorias.nombre as categoria FROM productos JOIN
         categorias ON productos.id_categoria = categorias.id_categoria WHERE id_producto=?");
         $sentencia->execute(array($id));
-        $producto = $sentencia->fetch(PDO::FETCH_OBJ);
-        return $producto;
+        return $sentencia->fetch(PDO::FETCH_OBJ);
     }
     
     function updateProductFromDB($id, $nombre,$descripcion,$precio, $imagen){

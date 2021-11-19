@@ -22,9 +22,9 @@ class ProductView{
         $this->smarty->display('templates/productABM.tpl');
     }
 
-    function notFound($error){
+    function message($error){
         $this->smarty->assign('error',$error);
-        $this->smarty->display('templates/notFound.tpl');
+        $this->smarty->display('templates/message.tpl');
     }
     function showProduct($producto){
         $this->smarty->assign('producto',$producto);

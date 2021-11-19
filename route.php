@@ -35,10 +35,19 @@ switch ($params[0]) {
         $loginController->logout(); 
         break;            
     case 'register':
-        $loginController->register(); //usar solo para agregar usuarios
+        $loginController->register(); 
         break;
     case 'userRegister':
         $loginController->userRegister();
+        break;
+    case 'usersView':
+        $loginController->usersView();
+        break;
+    case 'deleteUser': 
+        $loginController->deleteUser($params[1]); 
+        break;
+    case 'reasignLevel':
+        $loginController->reasignLevel($params[1]);
         break;
     case 'createProduct': 
         $productController->createProduct(); 
@@ -47,7 +56,6 @@ switch ($params[0]) {
         $productController->deleteProduct($params[1]); 
         break;
     case 'updateProduct': 
-        
         $productController->updateProduct();
             break;
     case 'viewProduct': 
@@ -61,7 +69,7 @@ switch ($params[0]) {
         break;
     
     default: 
-        $productController->pageNotFound('Error 404 - Page Not Found'); 
+        $productController->showMessage('Error 404 - Page Not Found'); 
         break;
 }
 ?>

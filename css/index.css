@@ -30,3 +30,20 @@ ul{
     font-family: 'Courier New', Courier, monospace;
     font-size: large;
 }
+
+.nivel0{
+    color: red;
+}
+
+.nivel1{
+    color:yellow;
+}
+
+.nivel2{
+    color: rgb(0, 255, 0);
+}
+
+
+.nivel3{
+    color: rgb(187, 161, 14);
+}

@@ -1,8 +1,7 @@
 {include file="templates/header.tpl"}
 
-<a class="btn btn-success" href="register">register</a>
 <a class="btn btn-danger" href="logout">logout</a>
-<a class="btn btn-primary" href="login">login</a>
+<a class="btn btn-warning" href="usersView">Users</a>
     
 <h2>Crear Producto</h2>
 
