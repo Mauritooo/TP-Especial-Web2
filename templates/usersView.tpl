@@ -6,6 +6,11 @@
                     <h5>Usuario: {$user->username} - Permiso: {$user->admin}.</h5>
                     {if $myUser}
                         <a class="btn btn-danger" href="deleteUser/{$user->username}">Borrar</a>
+                        <form action="reasignLevel/{$user->username}" method="post">
+                            conceder permisos: <input type="radio" value="1" name="radio" required>
+                            revocar permisos: <input type="radio" value="0" name="radio" checked>
+                            <input type="submit" value="enviar">
+                        </form>
                     {/if}
                 {/foreach}
                 {else}

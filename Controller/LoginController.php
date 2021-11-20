@@ -53,14 +53,18 @@ class LoginController{
             $user = $_POST['user'];
             $password = $_POST['password'];
             //inicio sesion.
-            session_start();
+
+            $mensaje = $this->model->setUser($user,password_hash($password, PASSWORD_BCRYPT));
             
-            $_SESSION['username'] = $user;
-            $_SESSION['permisoDeAdmin'] = 0;
-            $this->model->setUser($user,password_hash($password, PASSWORD_BCRYPT));
-            
-            $this->view->showHome();
+            if($mensaje){
+                session_start();
+                $_SESSION['username'] = $user;
+                $_SESSION['permisoDeAdmin'] = 0;
+                $this->view->message("USUARIO INSERTADO CON EXITO!");
             }else{
+                $this->view->message('EL USUARIO YA EXISTE!');
+            }
+        }else{
                 $this->view->message('Debe Ingresar sus Datos');
             }
         }
@@ -78,7 +82,7 @@ class LoginController{
     function deleteUser($userName){
         $this->checkLoggedIn();
         $this->model->deleteUserFromDB($userName);
-        $this->view->showLogin('Se elimino con exito el Usuario!');
+        //$this->view->showLogin('Se elimino con exito el Usuario!');
         $this->productView->showHomeLocation();
     }
 
@@ -89,8 +93,12 @@ class LoginController{
 
     function reasignLevel($user){
         $this->checkLoggedIn();
-        $this->model->reasignLevelUserFromDB($user, $_POST['levels']);
-        $this->view->message('Nivel de Acceso de usuario Modificado con Exito!');
+        if(isset($_POST['radio'])){
+            $this->model->reasignLevelUserFromDB($user, $_POST['radio']);
+            $this->view->message('Nivel de Acceso de usuario Modificado con Exito!');
+        }else{
+            $this->view->message('Debe elegir primero un nivel de acceso para el usuario');
+        }
     }
 
     function logout(){

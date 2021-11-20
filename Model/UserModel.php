@@ -16,8 +16,14 @@ class UserModel{
     }
 
     function setUser($user,$password){
-        $query = $this->db->prepare('INSERT INTO usuarios( username, password, admin) VALUES (? , ?, ?)');
-        $query->execute([$user,$password, 0]);
+        $usuario = $this->getUser($user);
+        if(!$usuario){
+            $query = $this->db->prepare('INSERT INTO usuarios( username, password, admin) VALUES (? , ?, ?)');
+            $query->execute([$user,$password, 0]);
+            return true;
+        }else{
+            return false;
+        }
     }
 
     function deleteUserFromDB($userName){
@@ -26,7 +32,7 @@ class UserModel{
     }
 
     function getUsers(){
-        $superUser = 'mauro';
+        $superUser = 'mauro'; //ESTE NO SE MUESTRA PORQUE ES EL SUPER USER. password = 123456
         $sentencia = $this->db->prepare('SELECT * FROM usuarios WHERE username != ?');
         $sentencia->execute([$superUser]);
         return $sentencia->fetchAll(PDO::FETCH_OBJ);
