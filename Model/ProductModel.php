@@ -17,6 +17,7 @@ class ProductModel{
     }
 
     function setProduct($nombre,$descripcion, $precio, $categoria, $imagen){
+        
         $sentencia = $this->db->prepare("INSERT INTO productos(nombre, descripcion, precio, id_categoria,imagen) VALUES(?, ?, ?, ?, ?)");
         $sentencia->execute(array($nombre,$descripcion,$precio, $categoria, $imagen));
     }

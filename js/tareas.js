@@ -31,4 +31,5 @@ function renderTareas(tareas) {
     };
     let html = templateTareas(context);
     document.querySelector("#container-tareas").innerHTML = html;
+    //document.querySelector("#comments-container").innerHTML = html;
 }

@@ -1,6 +1,6 @@
 <?php
 
-require_once 'JSONView.php';
+require_once 'API/View/JSONView.php';
 
 abstract class ApiController {
 
@@ -15,8 +15,6 @@ abstract class ApiController {
     }
 
     protected function getData() {
-        return json_decode($this->raw_data);
+        return json_decode($this->raw_data);    //convierte el String recibido a JSON
     }
-
-
 }

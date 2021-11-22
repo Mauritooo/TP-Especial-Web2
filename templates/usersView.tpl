@@ -3,7 +3,8 @@
         <div>
             {if $users}
                 {foreach from=$users item=$user}
-                    <h5>Usuario: {$user->username} - Permiso: {$user->admin}.</h5>
+                    <div class="usersViewStyle">
+                    <h5>Usuario: {$user->username} - Permiso: {if $user->admin} Admin{else}user{/if} - </h5>
                     {if $myUser}
                         <a class="btn btn-danger" href="deleteUser/{$user->username}">Borrar</a>
                         <form action="reasignLevel/{$user->username}" method="post">
@@ -12,6 +13,7 @@
                             <input type="submit" value="enviar">
                         </form>
                     {/if}
+                    </div>
                 {/foreach}
                 {else}
                     <h2>No hay Usuarios Registrados!</h2>

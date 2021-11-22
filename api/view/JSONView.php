@@ -5,7 +5,7 @@ class JSONView {
     public function response($data, $status) {//(DATOS Y EL CODIGO DE STATUS)
         header("Content-Type: application/json");
         header("HTTP/1.1 " . $status . " " . $this->_requestStatus($status));
-        echo json_encode($data);
+        echo json_encode($data);//transforma la data en un json
     }
 
     private function _requestStatus($code){

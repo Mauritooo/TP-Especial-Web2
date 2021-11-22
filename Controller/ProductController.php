@@ -30,9 +30,10 @@ class ProductController{
     }
 
     function createProduct(){
-        $this->checkLoggedIn();
-        if(!empty($_REQUEST['nombre']) && !empty($_REQUEST['descripcion']) && !empty($_REQUEST['precio']) && !empty($_REQUEST['categoria']) && !empty($_REQUEST['image'])){
-            $this->model->setProduct($_REQUEST['nombre'], $_REQUEST['descripcion'], $_REQUEST['precio'], $_REQUEST['categoria'], $_REQUEST['image']);
+        if($this->checkLoggedIn()){
+            if(!empty($_REQUEST['nombre']) && !empty($_REQUEST['descripcion']) && !empty($_REQUEST['precio']) && !empty($_REQUEST['categoria']) && !empty($_REQUEST['image'])){
+                $this->model->setProduct($_REQUEST['nombre'], $_REQUEST['descripcion'], $_REQUEST['precio'], $_REQUEST['categoria'], $_REQUEST['image']);
+            }
         }
         $this->view->showHomeLocation();
         
@@ -57,8 +58,8 @@ class ProductController{
 
     function viewProduct($id){
         $this->checkLoggedIn();
-        
         $producto = $this->model->getProductFromDB($id);
+        //
         $this->view->showProduct($producto);
     }
 

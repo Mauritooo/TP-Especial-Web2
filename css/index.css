@@ -31,19 +31,10 @@ ul{
     font-size: large;
 }
 
-.nivel0{
-    color: red;
+.usersViewStyle{
+    display: flex;
+    flex-direction: row;
+    padding-top: 1vh;
+    padding-bottom: 1vh;
 }
 
-.nivel1{
-    color:yellow;
-}
-
-.nivel2{
-    color: rgb(0, 255, 0);
-}
-
-
-.nivel3{
-    color: rgb(187, 161, 14);
-}

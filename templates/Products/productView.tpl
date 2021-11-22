@@ -21,6 +21,19 @@
         <li>Precio: ${$producto->precio}</li>
         <li>Categoria: {$producto->categoria}</li>
     </ul>
+    
+    <form action="API/addComment" method="post">
+        <input type="text" name="comment" placeholder="comente aqui..." required>
+        1<input type="radio" name="radio" value="1" checked>
+        2<input type="radio" name="radio" value="2" >
+        3<input type="radio" name="radio" value="3" >
+        4<input type="radio" name="radio" value="4" >
+        5<input type="radio" name="radio" value="5" >
+        <input type="submit" value="enviar">
+    </form>
+    <div id="comments-container">
+    <!--AQUI VAN LOS COMENTARIOS QUE SE TRAEN DESDE LA API-->
+    </div>
 </div>
     <a class="btn btn-primary" href="../home">volver</a>
     
