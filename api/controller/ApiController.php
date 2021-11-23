@@ -1,6 +1,6 @@
 <?php
 
-require_once 'API/View/JSONView.php';
+require_once 'API/View/ApiView.php';
 
 abstract class ApiController {
 
@@ -10,7 +10,7 @@ abstract class ApiController {
     private $raw_data;
 
     public function __construct() {
-        $this->view = new JSONView();
+        $this->view = new ApiView();
         $this->raw_data = file_get_contents("php://input"); //agarra el body en RAW
     }
 

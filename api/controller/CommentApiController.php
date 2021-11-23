@@ -1,20 +1,19 @@
 <?php
 
 require_once 'ApiController.php';
-require_once 'API/View/JSONView.php';
-require_once './model/ProductModel.php';
+require_once 'API/View/ApiView.php';
+require_once './model/CommentModel.php';
 
 class CommentApiController extends ApiController {
 
     public function __construct() {
 
         parent::__construct();
-        $this->model = new ProductModel();
+        $this->model = new CommentModel();
     }
 //--------------------------------------------------------------
     public function getComments($params = []) {
-        //RETORNA TODOS LOS COMENTARIOS SI EL PARAMETRO NO ESTA INGRESADO O 
-        //RETORNA LOS COMENTARIOS QUE ESTEN VINCULADOS A UN PRODUCTO si el parametro esta.
+
         if (empty($params)) {
             $comment = $this->model->getAllComments();
             $this->view->response($comment, 200);
@@ -31,8 +30,8 @@ class CommentApiController extends ApiController {
 //--------------------------------------------------------------
     public function deleteComment($params = []) {
         
-        $comment_id = $params[':ID'];   //es necesario??
-        $comment = $this->model->getComment($comment_id);//es necesario??
+        $comment_id = $params[':ID'];  
+        $comment = $this->model->getComment($comment_id);
 
         if ($comment) {
             $this->model->deleteComment($comment_id);
@@ -42,15 +41,14 @@ class CommentApiController extends ApiController {
             $this->view->response("Comment id=$comment_id not found", 404);
     }
 //--------------------------------------------------------------
-    public function addComment($params = []) {
-        $body = $this->getData();   //como se usa?
+    public function addComment() {
+        $body = $this->getData();   //cuando hago POST a esta api. carga los datos del body recibido.
 
         $comentario = $body->comentario;
-        $id_usuario = $body->id_usuario;    //aun no implementado
+        $id_usuario = $body->id_usuario;  
         $id_producto = $body->id_producto;
-        $calificacion = $body->calificacion;
+        $calificacion = ($body->calificacion);
 
-        //inserta la comment y la busca
         $id_Comment = $this->model->addComment($id_usuario, $comentario, $id_producto, $calificacion);
         $comment = $this->model->getComment($id_Comment);
 

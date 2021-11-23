@@ -59,6 +59,7 @@ class LoginController{
             if($mensaje){
                 session_start();
                 $_SESSION['username'] = $user;
+                
                 $_SESSION['permisoDeAdmin'] = 0;
                 $this->view->message("USUARIO INSERTADO CON EXITO!");
             }else{
@@ -115,5 +116,13 @@ class LoginController{
             return $_SESSION["username"];
         else
             return "";
+    }
+
+    function getUserBySession(){
+        //retorna completo el registro del usuario
+        if(isset($_SESSION["username"]))
+            return  $this->model->getUser($_SESSION["username"]);
+        else
+            return null;
     }
 }

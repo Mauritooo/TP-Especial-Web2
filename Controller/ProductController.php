@@ -57,10 +57,14 @@ class ProductController{
     }
 
     function viewProduct($id){
+        //muesta un producto
         $this->checkLoggedIn();
         $producto = $this->model->getProductFromDB($id);
-        //
-        $this->view->showProduct($producto);
+        $usuario = $this->controller->getUserBySession();//pasa tambien los datos del user para registrarlo en los comentarios
+        if($producto)
+            $this->view->showProduct($producto,$usuario);
+        else
+            $this->view->message('NO EXISTE EL PRODUCTO!');
     }
 
     function checkLoggedIn(){

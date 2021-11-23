@@ -10,7 +10,7 @@ $r->addRoute("comentarios","GET", "CommentApiController", "getComments");//addRo
 $r->addRoute("comentarios/:ID", "GET", "CommentApiController", "getComments");//comentarios de un producto id producto SSR
 $r->addRoute("comentarios/:ID", "DELETE", "CommentApiController", "deleteComment");
 $r->addRoute("comentarios", "POST", "CommentApiController", "addComment");
-$r->addRoute("comentarios/:ID","PUT", "CommentApiController", "updateComment");
+//$r->addRoute("comentarios/:ID","PUT", "CommentApiController", "updateComment");
 
 //run
 $r->route($_GET['resource'], $_SERVER['REQUEST_METHOD']);

@@ -1,6 +1,6 @@
 <?php
 
-class JSONView {
+class ApiView {
 
     public function response($data, $status) {//(DATOS Y EL CODIGO DE STATUS)
         header("Content-Type: application/json");

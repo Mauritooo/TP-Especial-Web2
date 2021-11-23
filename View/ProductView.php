@@ -28,8 +28,9 @@ class ProductView{
         $this->smarty->assign('error',$error);
         $this->smarty->display('templates/message.tpl');
     }
-    function showProduct($producto){
+    function showProduct($producto, $usuario){
         $this->smarty->assign('producto',$producto);
+        $this->smarty->assign('usuario',$usuario);
         $this->smarty->display('templates/Products/productView.tpl');
     }
 
