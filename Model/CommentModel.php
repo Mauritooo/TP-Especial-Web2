@@ -10,7 +10,7 @@ class CommentModel{
 //--------------------------------------------------------------
     function getComments($id_producto = ""){ 
         //retorna los comentarios con un id_producto 
-        $sentencia = $this->db->prepare("SELECT comentarios.*, productos.*,usuarios.* 
+        $sentencia = $this->db->prepare("SELECT comentarios.*, productos.*,usuarios.username
         FROM comentarios 
         LEFT JOIN productos ON (productos.id_producto = comentarios.id_producto) 
         LEFT JOIN usuarios ON (usuarios.id_usuario = comentarios.id_usuario) 

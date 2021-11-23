@@ -4,17 +4,26 @@ let API_URL = "http://localhost/web2/codigo/electrizante/api/comentarios";
 
 
 document.querySelector("#btn-form").addEventListener('click',addComment);
-//document.querySelectorAll("data-btn-borrar").addEventListener('click',deleteComment);
-let btnsBorrar = document.querySelectorAll(".btn-borrar");
-        btnsBorrar.forEach(e => {e.addEventListener("click", deleteComment);
-        });
+
+
+//let btnsBorrar = document.querySelectorAll("#btn-borrar");
+        //btnsBorrar.forEach(e => {e.addEventListener("click", deleteComment);
+        //});
 
 
 let app = new Vue({
-    el:"#template-vue-comments",
-    data:{comments: []}
-});
-
+    el:"#comments-vue-view",
+    
+    data:{
+        comments: [],
+    },
+    methods:{
+            deleteComentario: function(nro_btn){
+            deleteComment(nro_btn);
+            }
+        }
+    }
+)
 
 async function getComments(){
     try {
@@ -23,11 +32,12 @@ async function getComments(){
         if(response.ok){
             let comments = await response.json();//ya tengo el json
             app.comments = comments;
-            console.log('estoy dentro del getComments');
-            console.log(comments);
+            app.comentario = comments[0];
+            //console.log('estoy dentro del getComments');
+            //console.log(comments);
         }
     } catch (error) {
-        console.log('estoy en el error del getComments');
+        //console.log('estoy en el error del getComments');
         console.log(error);
     }
 }
@@ -62,8 +72,9 @@ async function addComment(e){
         })
         //console.log('entra al addComment con estos Datos:');
         //console.log(comment);
-        if(response.ok)
+        if(response.ok){
             getComments();
+            document.querySelector("#btn-borrar").addEventListener('click',deleteComment);}
             //console.log('responde ok . envia los datos por post');
         else
             if(response.status == 201)
@@ -75,15 +86,15 @@ async function addComment(e){
     }
 }
 
-async function deleteComment(e){
-    e.preventDefault();
-    let id_comentario = this.getAttribute("data-id_comentario"); 
+async function deleteComment(nro_btn){
+    //e.preventDefault();
+
+    console.log('entra al deleteComment:');
     try {
-        let response = await fetch(API_URL+"/"+id_comentario ,{
-            "method": "DELETE",
-        })
-        console.log('entra al deleteComment con id_comentario:');
-        console.log(id_comentario);
+        let response = await fetch(API_URL+"/"+nro_btn ,{
+            "method": "DELETE"})
+        console.log('entra al try del deleteComment con id_comentario:');
+        console.log(nro_btn);
         if(response.ok){
             console.log('Se elimino con Exito!');
             getComments();
@@ -92,10 +103,11 @@ async function deleteComment(e){
             if(response.status == 201)
                 console.log('http 201');
             else
-                console.log("http error");
+                console.log("http error - NO SE PUDO ELIMINAR!");
     } catch (error) {
         console.log(error);
     }
 }
 
 document.addEventListener("DOMContentLoaded", getComments);
+

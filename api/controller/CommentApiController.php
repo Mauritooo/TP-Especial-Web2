@@ -3,13 +3,17 @@
 require_once 'ApiController.php';
 require_once 'API/View/ApiView.php';
 require_once './model/CommentModel.php';
+require_once './controller/LoginController.php';
 
 class CommentApiController extends ApiController {
 
     public function __construct() {
 
+        $this->controller = new LoginController();
+        
         parent::__construct();
         $this->model = new CommentModel();
+        
     }
 //--------------------------------------------------------------
     public function getComments($params = []) {
@@ -33,9 +37,16 @@ class CommentApiController extends ApiController {
         $comment_id = $params[':ID'];  
         $comment = $this->model->getComment($comment_id);
 
+        $esAdmin = $this->controller->getUserBySession();
+
         if ($comment) {
-            $this->model->deleteComment($comment_id);
-            $this->view->response("Comentario id=$comment_id eliminado con éxito", 200);
+            //if(isset($esAdmin))//verifica que sea admin antes de eliminar.
+               // if($esAdmin->Admin != 0){
+                    $this->model->deleteComment($comment_id);
+                    $this->view->response("Comentario id=$comment_id eliminado con éxito", 200);
+              //  }else{
+                //    $this->view->response("Comentario id=$comment_id mo tiene permisos para eliminar", 401 );
+               // }
         }
         else 
             $this->view->response("Comment id=$comment_id not found", 404);
