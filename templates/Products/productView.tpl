@@ -27,7 +27,7 @@
         </ul>
         
             
-        {if {$usuario->id_producto} != null}
+        {if {$usuario->id_usuario} != null}
             <form id="comment_form" data-id_producto="{$producto->id_producto}" 
             data-nombre_usuario="{$usuario->username}"  data-id_usuario="{$usuario->id_usuario}" >   
                 <input type="textarea" id="comentario" name="comentario" placeholder="comente aqui..." required>

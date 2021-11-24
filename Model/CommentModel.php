@@ -54,6 +54,6 @@ class CommentModel{
     function addComment($id_usuario, $comentario, $id_producto, $calificacion){
         var_dump($id_usuario, $comentario, $id_producto, $calificacion);
         $sentencia = $this->db->prepare("INSERT INTO comentarios(id_producto, comentario, calificacion, id_usuario) VALUES(?, ?, ?, ?)");
-        $sentencia->execute(array($id_producto, $comentario, $calificacion, $id_usuario));
+        return $sentencia->execute(array($id_producto, $comentario, $calificacion, $id_usuario));
     }
 }

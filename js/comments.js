@@ -28,7 +28,6 @@ async function getComments(){
         if(response.ok){
             let comments = await response.json();
             app.comments = comments;
-            app.comentario = comments[0];
             }
 
     } catch (error) {
@@ -50,7 +49,6 @@ function createComment(){
         "calificacion": calificacion
     };
 
-    console.log(comment);
     return comment;
     
 }
@@ -66,6 +64,7 @@ async function addComment(e){
         })
 
         if(response.ok){
+            console.log('se inserto con exito!');
             getComments();
             document.querySelector("#btn-borrar").addEventListener('click',deleteComment);}
 
@@ -73,7 +72,10 @@ async function addComment(e){
             if(response.status == 201)
                 console.log('http 201');
             else
-                console.log("http error");
+                if(response.status == 401)
+                    console.log("Error: no tiene permisos para realizar esta accion");
+                else
+                    console.log("http error");
     } catch (error) {
         console.log(error);
     }
@@ -85,17 +87,21 @@ async function deleteComment(nro_btn){
     try {
         let response = await fetch(API_URL+"/"+nro_btn ,{
             "method": "DELETE"})
-        console.log('entra al try del deleteComment con id_comentario:');
-        console.log(nro_btn);
-        if(response.ok){
+        if(response.status == 200){
             console.log('Se elimino con Exito!');
             getComments();
         }
         else
             if(response.status == 201)
                 console.log('http 201');
-            else
-                console.log("http error - NO SE PUDO ELIMINAR!");
+            else 
+                if( response.status == 404)
+                    console.log("http error - NO SE PUDO ELIMINAR!");
+                else
+                    if(response.status == 401){
+                        console.log(response.status);
+                        console.log("Error: no cuenta con los permisos necesarios para eliminar");
+                    }
     } catch (error) {
         console.log(error);
     }
