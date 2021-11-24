@@ -5,12 +5,7 @@ let API_URL = "http://localhost/web2/codigo/electrizante/api/comentarios";
 
 document.querySelector("#btn-form").addEventListener('click',addComment);
 
-
-//let btnsBorrar = document.querySelectorAll("#btn-borrar");
-        //btnsBorrar.forEach(e => {e.addEventListener("click", deleteComment);
-        //});
-
-
+//------------------------------------------------------------------
 let app = new Vue({
     el:"#comments-vue-view",
     
@@ -24,26 +19,25 @@ let app = new Vue({
         }
     }
 )
-
+//------------------------------------------------------------------
 async function getComments(){
     try {
-        let id_producto = comment_form.getAttribute('data-id_producto');//obtengo el id del producto 
-        let response = await fetch(API_URL+'/'+id_producto);//obtengo los comentarios del producto
+        let id_producto = comment_form.getAttribute('data-id_producto');
+        let response = await fetch(API_URL+'/'+id_producto);
+
         if(response.ok){
-            let comments = await response.json();//ya tengo el json
+            let comments = await response.json();
             app.comments = comments;
             app.comentario = comments[0];
-            //console.log('estoy dentro del getComments');
-            //console.log(comments);
-        }
+            }
+
     } catch (error) {
-        //console.log('estoy en el error del getComments');
         console.log(error);
     }
 }
-
+//------------------------------------------------------------------
 function createComment(){
-    //let formData = new FormData(comment_form);
+
     let id_producto = comment_form.getAttribute('data-id_producto');
     let id_usuario = comment_form.getAttribute('data-id_usuario');
     let comentario = comment_form.querySelector('#comentario').value;
@@ -55,27 +49,26 @@ function createComment(){
         "comentario": comentario,
         "calificacion": calificacion
     };
-    //console.log('sale del createComment con estos datos');
+
     console.log(comment);
     return comment;
     
 }
-
+//------------------------------------------------------------------
 async function addComment(e){
     e.preventDefault();
     let comment = createComment();
     try {
-        let response = await fetch(API_URL,{    //TIRA UNA ERROR 500 AL OBTENER EL RESPONSE
+        let response = await fetch(API_URL,{
             "method": "POST",
             "headers": { "Content-Type": "application/json"},
             "body":JSON.stringify(comment)
         })
-        //console.log('entra al addComment con estos Datos:');
-        //console.log(comment);
+
         if(response.ok){
             getComments();
             document.querySelector("#btn-borrar").addEventListener('click',deleteComment);}
-            //console.log('responde ok . envia los datos por post');
+
         else
             if(response.status == 201)
                 console.log('http 201');
@@ -85,9 +78,8 @@ async function addComment(e){
         console.log(error);
     }
 }
-
+//------------------------------------------------------------------
 async function deleteComment(nro_btn){
-    //e.preventDefault();
 
     console.log('entra al deleteComment:');
     try {

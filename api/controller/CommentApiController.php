@@ -6,7 +6,7 @@ require_once './model/CommentModel.php';
 require_once './controller/LoginController.php';
 
 class CommentApiController extends ApiController {
-
+//------------------------------------------------------------------
     public function __construct() {
 
         $this->controller = new LoginController();
@@ -17,7 +17,7 @@ class CommentApiController extends ApiController {
     }
 //--------------------------------------------------------------
     public function getComments($params = []) {
-
+        //LEVANTA TODOS LOS COMENTARIOS CUYO id DE PRODCUTO ES PASADO POR PARAMETRO
         if (empty($params)) {
             $comment = $this->model->getAllComments();
             $this->view->response($comment, 200);
@@ -27,33 +27,29 @@ class CommentApiController extends ApiController {
             $comment = $this->model->getComments($id_producto);
             if ($comment)
                 $this->view->response($comment, 200);
-            else // si no existe el comentario
+            else 
                 $this->view->response("comment id=$id_producto not found", 404);
         }
     }
 //--------------------------------------------------------------
     public function deleteComment($params = []) {
-        
+        //ELIMINA UN COMENTARIO CUYO id ES PASADO POR PARAMETRO
         $comment_id = $params[':ID'];  
         $comment = $this->model->getComment($comment_id);
 
         $esAdmin = $this->controller->getUserBySession();
 
         if ($comment) {
-            //if(isset($esAdmin))//verifica que sea admin antes de eliminar.
-               // if($esAdmin->Admin != 0){
-                    $this->model->deleteComment($comment_id);
-                    $this->view->response("Comentario id=$comment_id eliminado con éxito", 200);
-              //  }else{
-                //    $this->view->response("Comentario id=$comment_id mo tiene permisos para eliminar", 401 );
-               // }
+            $this->model->deleteComment($comment_id);
+            $this->view->response("Comentario id=$comment_id eliminado con éxito", 200);
         }
         else 
             $this->view->response("Comment id=$comment_id not found", 404);
     }
 //--------------------------------------------------------------
     public function addComment() {
-        $body = $this->getData();   //cuando hago POST a esta api. carga los datos del body recibido.
+        //AGREGA UN COMENTARIO
+        $body = $this->getData();   
 
         $comentario = $body->comentario;
         $id_usuario = $body->id_usuario;  
@@ -70,7 +66,7 @@ class CommentApiController extends ApiController {
     }
 //----------------------------------------------------------------
     public function updateComment($params = []) {
-        
+        //FUNCION DE ACTUALIZAR COMENTARIO. {no solicitado en la entrega del TPE}
         $comment_id = $params[':ID'];
         $comment = $this->model->getComment($comment_id);
 

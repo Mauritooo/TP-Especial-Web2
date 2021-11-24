@@ -15,7 +15,10 @@
     <h1>{$titulo} : {$categoria[0]->nombre}</h1>
 
     {foreach from=$categoria item=$producto}
-    
+        <div  class="show-product">
+                <div>
+                    <img class="imagen" src="{$producto->imagen}" alt="cosa">
+                </div>
                 <div>
                     <ul>
                         <li>Id: {$producto->id_categoria}</li> 
@@ -24,9 +27,7 @@
                         <li>Precio: ${$producto->precio}</li>
                     </ul>
                 </div>
-                <div>
-                    <img class="imagen" src="{$producto->imagen}" alt="cosa">
-                </div>
+        </div>
                 <br>
     {/foreach}
     {else}

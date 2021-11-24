@@ -7,7 +7,6 @@ require_once "./Controller/CategoryController.php";
 define('BASE_URL', '//'.$_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'].dirname($_SERVER['PHP_SELF']).'/');
 
 
-// lee la acción
 if (!empty($_GET['accion'])) {
     $accion = $_GET['accion'];
 } else {
@@ -71,4 +70,3 @@ switch ($params[0]) {
         $productController->showMessage('Error 404 - Page Not Found'); 
         break;
 }
-?>

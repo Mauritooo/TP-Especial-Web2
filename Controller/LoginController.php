@@ -9,23 +9,25 @@ class LoginController{
     private $model;
     private $view;
     private $productView;
-
-    function __construct()
-    {
+//------------------------------------------------------------------
+    function __construct(){
         $this->model = new UserModel();
         $this->view = new LoginView();
         $this->productView = new ProductView();
     }
-
+//------------------------------------------------------------------
     function register(){
+        //LLAMA A LA FUNCION QUE RENDERIZA LA PAGINA DE REGISTRO
         $this->view->showRegister();
     }
-
+//------------------------------------------------------------------
     function login(){
+        //LLAMA A LA FUNCION QUE RENDERIZA LA PAGINA DE LOGIN
         $this->view->showLogin();
     }
-
+//------------------------------------------------------------------
     function verifyLogin(){
+        //VERIFICA EL LOGUEO DE UN USUARIO REGISTRADO
         if(!empty($_POST['user']) && !empty($_POST['password'])){
             $user = $_POST['user'];
             $password = $_POST['password'];
@@ -46,16 +48,15 @@ class LoginController{
             $this->view->showLogin('Debe Ingresar sus Datos para Loguearse o Registrarse');
         }
     }
-    
+//------------------------------------------------------------------
     function userRegister(){
-
+        //REGISTRA A UN NUEVO USUARIO EN LA DB
         if(!empty($_POST['user']) && !empty($_POST['password'])){
             $user = $_POST['user'];
             $password = $_POST['password'];
-            //inicio sesion.
 
             $mensaje = $this->model->setUser($user,password_hash($password, PASSWORD_BCRYPT));
-            
+
             if($mensaje){
                 session_start();
                 $_SESSION['username'] = $user;
@@ -69,39 +70,39 @@ class LoginController{
                 $this->view->message('Debe Ingresar sus Datos');
             }
         }
-    
+//------------------------------------------------------------------
     function checkLoggedIn(){
+        //VERIFICA QUE LA SESSION ESTE INICIADA.
         session_start();
-
         if(!isset($_SESSION["username"])){
             //$this->view->showLoginLocation();
             return false;
         }
         return true;
     }
-
+//------------------------------------------------------------------
     function deleteUser($userName){
+        //ELIMINA UN USUARIO CUYO id ES PASADO POR PARAMETRO.
         $this->checkLoggedIn();
         $this->model->deleteUserFromDB($userName);
-        //$this->view->showLogin('Se elimino con exito el Usuario!');
         $this->productView->showHomeLocation();
     }
-
+//------------------------------------------------------------------
     function usersView(){
+        //MUESTRA TODOS LOS USUARIOS REGISTRADOS EN EL SISTEMA
         $this->checkLoggedIn();
         $this->view->showUsers($this->model->getUsers());
     }
-
+//------------------------------------------------------------------
     function reasignLevel($user){
+        //MODIFICA EL ROL DEL USUARIO EN LA DB (admin o user)
         $this->checkLoggedIn();
         if(isset($_POST['radio'])){
             $this->model->reasignLevelUserFromDB($user, $_POST['radio']);
             $this->view->message('Nivel de Acceso de usuario Modificado con Exito!');
-        }else{
-            $this->view->message('Debe elegir primero un nivel de acceso para el usuario');
         }
     }
-
+//------------------------------------------------------------------
     function logout(){
         if($this->checkLoggedIn()){
         session_destroy();
@@ -109,15 +110,15 @@ class LoginController{
         }else{
             $this->productView->showHomeLocation();
         }
-
     }
+//------------------------------------------------------------------
     function getSession(){
         if(isset($_SESSION["username"]))
             return $_SESSION["username"];
         else
             return "";
     }
-
+//------------------------------------------------------------------
     function getUserBySession(){
         //retorna completo el registro del usuario
         if(isset($_SESSION["username"]))

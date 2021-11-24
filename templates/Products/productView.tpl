@@ -10,6 +10,7 @@
             integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
             <!-- versión de producción, optimizada para tamaño y velocidad -->
             <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+
         </head>
     <body>
 
@@ -25,16 +26,20 @@
             <li>Categoria: {$producto->categoria}</li>
         </ul>
         
-        <form id="comment_form" data-id_producto="{$producto->id_producto}" 
-        data-nombre_usuario="{$usuario->username}" data-id_usuario="{$usuario->id_usuario}" >   
-        <input type="textarea" id="comentario" name="comentario" placeholder="comente aqui..." required>
-        <input id="puntuacion" type="range"   min="1" max="5" step="1" value="5" >
-        <input type="submit" value="enviar" id="btn-form">
-        </form>
+            
+        {if {$usuario->id_producto} != null}
+            <form id="comment_form" data-id_producto="{$producto->id_producto}" 
+            data-nombre_usuario="{$usuario->username}"  data-id_usuario="{$usuario->id_usuario}" >   
+                <input type="textarea" id="comentario" name="comentario" placeholder="comente aqui..." required>
+                <input id="puntuacion" type="range"   min="1" max="5" step="1" value="5" >
+                <input type="submit" value="enviar" id="btn-form">
+            </form>
+        {/if}
 
         <div id="comments-container">
         {include file="templates/vue/comments.tpl"}
         </div>
+
     </div>
         <a class="btn btn-primary" href="../home">volver</a>
     

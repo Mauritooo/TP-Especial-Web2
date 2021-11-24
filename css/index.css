@@ -38,3 +38,17 @@ ul{
     padding-bottom: 1vh;
 }
 
+.caja-comentarios{
+    border: solid black 1px;
+}
+
+span{
+    font-weight: bold;
+}
+
+.show-product{
+    border: solid black 1px;
+    align-items: center;
+    flex-direction: column;
+    background-color: rgb(189, 241, 241);
+}
