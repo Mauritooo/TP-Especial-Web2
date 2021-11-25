@@ -27,14 +27,14 @@
         </ul>
         
             
-        {if {$usuario->id_usuario} != null}
-            <form id="comment_form" data-id_producto="{$producto->id_producto}" 
-            data-nombre_usuario="{$usuario->username}"  data-id_usuario="{$usuario->id_usuario}" >   
+        
+        <!--ACA ESTA EL ERROR: EN CASO DEL VISITANTE INTENTA LEVANTAR EL USUARIO CUANDO NO ESTA SETEADO-->
+            <form id="comment_form" data-id_producto="{$producto->id_producto}">
                 <input type="textarea" id="comentario" name="comentario" placeholder="comente aqui..." required>
                 <input id="puntuacion" type="range"   min="1" max="5" step="1" value="5" >
                 <input type="submit" value="enviar" id="btn-form">
             </form>
-        {/if}
+        
 
         <div id="comments-container">
         {include file="templates/vue/comments.tpl"}

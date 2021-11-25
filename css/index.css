@@ -52,3 +52,11 @@ span{
     flex-direction: column;
     background-color: rgb(189, 241, 241);
 }
+
+.admin{
+    color: rgb(52, 253, 1);
+}
+
+.user{
+    color: red;
+}

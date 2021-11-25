@@ -38,13 +38,11 @@ async function getComments(){
 function createComment(){
 
     let id_producto = comment_form.getAttribute('data-id_producto');
-    let id_usuario = comment_form.getAttribute('data-id_usuario');
     let comentario = comment_form.querySelector('#comentario').value;
     let calificacion = comment_form.querySelector('#puntuacion').value;
 
     let comment = {
         "id_producto": id_producto,
-        "id_usuario": id_usuario,
         "comentario": comentario,
         "calificacion": calificacion
     };
@@ -55,7 +53,9 @@ function createComment(){
 //------------------------------------------------------------------
 async function addComment(e){
     e.preventDefault();
+    
     let comment = createComment();
+
     try {
         let response = await fetch(API_URL,{
             "method": "POST",
@@ -83,7 +83,6 @@ async function addComment(e){
 //------------------------------------------------------------------
 async function deleteComment(nro_btn){
 
-    console.log('entra al deleteComment:');
     try {
         let response = await fetch(API_URL+"/"+nro_btn ,{
             "method": "DELETE"})
@@ -98,10 +97,8 @@ async function deleteComment(nro_btn){
                 if( response.status == 404)
                     console.log("http error - NO SE PUDO ELIMINAR!");
                 else
-                    if(response.status == 401){
-                        console.log(response.status);
+                    if(response.status == 401)
                         console.log("Error: no cuenta con los permisos necesarios para eliminar");
-                    }
     } catch (error) {
         console.log(error);
     }

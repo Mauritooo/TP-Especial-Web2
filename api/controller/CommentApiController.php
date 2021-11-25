@@ -56,18 +56,16 @@ class CommentApiController extends ApiController {
         $body = $this->getData();   
 
         $comentario = $body->comentario;
-        $id_usuario = $body->id_usuario;  
         $id_producto = $body->id_producto;
         $calificacion = ($body->calificacion);
 
         if($this->controller->checkloggedIn()){
             //verifica si es un usuario logueado. si no es asi no puede comentar.
-            $id_Comment = $this->model->addComment($id_usuario, $comentario, $id_producto, $calificacion);
+            $id_Comment = $this->model->addComment($_SESSION["id_usuario"], $comentario, $id_producto, $calificacion);
             $comment = $this->model->getComment($id_Comment);
             if ($comment)
                 $this->view->response($comment, 200);
-            //else
-                //$this->view->response("Error al guardar", 500);
+                
         }else
             $this->view->response("logue su usario para poder comentar",401);
         
@@ -90,7 +88,7 @@ class CommentApiController extends ApiController {
             else
             $this->view->response("comment id=$comment_id not found", 404);
     }
-
+//----------------------------------------------------------------
     function message($error){
         //RENDERIZA UN MENSAJE.
         $this->smarty->assign('error',$error);

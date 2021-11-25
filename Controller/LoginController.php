@@ -39,6 +39,7 @@ class LoginController{
                 session_start();
                 $_SESSION['username'] = $userLog->username;
                 $_SESSION['permisoDeAdmin'] = $userLog->admin; //guardo en la sesion si soy admin 
+                $_SESSION['id_usuario'] = $userLog->id_usuario;
 
                 $this->view->showHome();
             }else{
@@ -60,8 +61,8 @@ class LoginController{
             if($mensaje){
                 session_start();
                 $_SESSION['username'] = $user;
-                
                 $_SESSION['permisoDeAdmin'] = 0;
+                
                 $this->view->message("USUARIO INSERTADO CON EXITO!");
             }else{
                 $this->view->message('EL USUARIO YA EXISTE!');
@@ -75,7 +76,6 @@ class LoginController{
         //VERIFICA QUE LA SESSION ESTE INICIADA.
         session_start();
         if(!isset($_SESSION["username"])){
-            //$this->view->showLoginLocation();
             return false;
         }
         return true;
