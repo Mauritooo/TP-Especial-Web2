@@ -62,7 +62,10 @@ class LoginController{
                 session_start();
                 $_SESSION['username'] = $user;
                 $_SESSION['permisoDeAdmin'] = 0;
-                
+
+                $userLog = $this->model->getUser($user);
+                $_SESSION['id_usuario'] = $userLog->id_usuario;
+
                 $this->view->message("USUARIO INSERTADO CON EXITO!");
             }else{
                 $this->view->message('EL USUARIO YA EXISTE!');
@@ -79,6 +82,15 @@ class LoginController{
             return false;
         }
         return true;
+    }
+//------------------------------------------------------------------
+    function checkIsAdmin(){
+        //VERIFICA QUE EL USUARIO SEA ADMIN.
+        session_start();
+        if($_SESSION['permisoDeAdmin'] == '1'){
+            return true;
+        }else
+            return false;
     }
 //------------------------------------------------------------------
     function deleteUser($userName){
@@ -99,7 +111,7 @@ class LoginController{
         $this->checkLoggedIn();
         if(isset($_POST['radio'])){
             $this->model->reasignLevelUserFromDB($user, $_POST['radio']);
-            $this->view->message('Nivel de Acceso de usuario Modificado con Exito!');
+            $this->productView->showHomeLocation();
         }
     }
 //------------------------------------------------------------------

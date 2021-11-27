@@ -18,7 +18,7 @@ class CommentApiController extends ApiController {
     }
 //--------------------------------------------------------------
     public function getComments($params = []) {
-        //LEVANTA TODOS LOS COMENTARIOS CUYO id DE PRODCUTO ES PASADO POR PARAMETRO
+        //LEVANTA TODOS LOS COMENTARIOS CUYO id DE PRODUCTO ES PASADO POR PARAMETRO
         if (empty($params)) {
             $comment = $this->model->getAllComments();
             $this->view->response($comment, 200);
@@ -39,6 +39,7 @@ class CommentApiController extends ApiController {
         $comment = $this->model->getComment($comment_id);
 
         if($this->controller->checkloggedIn()&& $_SESSION['permisoDeAdmin'] == 1){
+            
             if ($comment) {
                 $this->model->deleteComment($comment_id);
                 $this->view->response("Comentario id=$comment_id eliminado con exito", 200);
@@ -47,7 +48,7 @@ class CommentApiController extends ApiController {
                 $this->view->response("Comentario id=$comment_id no encontrado", 404);
         }       
         else
-            $this->view->response(" Usted no tiene permisos para realizar esta operacion", 401);
+            $this->view->response(" Usted no tiene permisos para realizar esta operacion", 403);
         
     }
 //--------------------------------------------------------------
@@ -69,24 +70,6 @@ class CommentApiController extends ApiController {
         }else
             $this->view->response("logue su usario para poder comentar",401);
         
-    }
-//----------------------------------------------------------------
-    public function updateComment($params = []) {
-        //FUNCION DE ACTUALIZAR COMENTARIO. {no solicitado en la entrega del TPE}
-        $comment_id = $params[':ID'];
-        $comment = $this->model->getComment($comment_id);
-
-        if ($comment) {
-            $body = $this->getData();
-            $id_comentario = $body->comentario; 
-            $comentario = $body->comentario;
-            
-                $this->model->updateComment($id_comentario, $comentario);
-                $comment = $this->model->getComment($comment_id);
-                $this->view->response($comment, 200);
-        }
-            else
-            $this->view->response("comment id=$comment_id not found", 404);
     }
 //----------------------------------------------------------------
     function message($error){

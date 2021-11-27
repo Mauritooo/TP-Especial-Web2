@@ -13,7 +13,6 @@ class ProductModel{
         $sentencia = $this->db->prepare( "SELECT * FROM productos");
         $sentencia->execute();
         return $sentencia->fetchAll(PDO::FETCH_OBJ);
-        
     }
 //------------------------------------------------------------------
     function setProduct($nombre,$descripcion, $precio, $categoria, $imagen=""){

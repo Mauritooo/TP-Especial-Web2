@@ -12,6 +12,7 @@ let app = new Vue({
     data:{
         comments: [],
     },
+    
     methods:{
             deleteComentario: function(nro_btn){
             deleteComment(nro_btn);
@@ -72,7 +73,7 @@ async function addComment(e){
             if(response.status == 201)
                 console.log('http 201');
             else
-                if(response.status == 401)
+                if(response.status == 403)
                     console.log("Error: no tiene permisos para realizar esta accion");
                 else
                     console.log("http error");
@@ -97,7 +98,7 @@ async function deleteComment(nro_btn){
                 if( response.status == 404)
                     console.log("http error - NO SE PUDO ELIMINAR!");
                 else
-                    if(response.status == 401)
+                    if(response.status == 403)
                         console.log("Error: no cuenta con los permisos necesarios para eliminar");
     } catch (error) {
         console.log(error);

@@ -32,6 +32,7 @@ class ProductController{
         //LEVANTA LOS DATOS QUE SERAN USADOS PARA AGREGAR UN PRODUCTO Y LOS ENVIA A LA DB.
         if($this->controller->checkLoggedIn()){
             if(!empty($_REQUEST['nombre']) && !empty($_REQUEST['descripcion']) && !empty($_REQUEST['precio']) && !empty($_REQUEST['categoria']) || !empty($_REQUEST['image'])){
+
                 if(isset($_REQUEST['image']))
                     $this->model->setProduct($_REQUEST['nombre'], $_REQUEST['descripcion'], $_REQUEST['precio'], $_REQUEST['categoria'], $_REQUEST['image']);
                 else
