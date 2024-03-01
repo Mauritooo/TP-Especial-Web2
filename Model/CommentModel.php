@@ -5,7 +5,7 @@ class CommentModel{
     private $db;
 
     function __construct(){
-        $this->db = new PDO('mysql:host=localhost;'.'dbname=db_electrizante;charset=utf8', 'root', '');
+        $this->db = new PDO('mysql:host=localhost;'.'dbname=db_electrizante;charset=utf8', 'root', 'root');
     }
 //--------------------------------------------------------------
     function getComments($id_producto = ""){ 
