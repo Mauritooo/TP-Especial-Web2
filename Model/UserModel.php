@@ -5,7 +5,8 @@ class UserModel{
     private $db;
 
     function __construct(){
-        $this->db = new PDO('mysql:host='.$servername.';'.'dbname='.$database.';charset=utf8', $username, $password);    }
+        $this->db = new PDO('mysql:host='.Config::$servername.';'.'dbname='.Config::$database.';charset=utf8', Config::$username, Config::$password);
+    }
 
     function getUser($user){
         //RETORNA EL USUARIO CUYO username ES IGUAL AL PASADO POR PARAMETRO.
