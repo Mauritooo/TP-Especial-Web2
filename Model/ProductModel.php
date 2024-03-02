@@ -5,7 +5,8 @@ class ProductModel{
     private $db;
 //------------------------------------------------------------------
     function __construct(){
-        $this->db = new PDO('mysql:host='.$servername.';'.'dbname='.$database.';charset=utf8', $username, $password);    }
+        $this->db = new PDO('mysql:host='.Config::$servername.';'.'dbname='.Config::$database.';charset=utf8', Config::$username, Config::$password);
+    }
 //------------------------------------------------------------------
     function getProducts(){ 
         //RETORNA TODOS LOS PRODUCTOS.
