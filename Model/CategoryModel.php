@@ -5,8 +5,7 @@ class CategoryModel{
     private $db;
 //------------------------------------------------------------------
     function __construct(){
-        $this->db = new PDO('mysql:host=localhost;'.'dbname=db_electrizante;charset=utf8', 'root', 'root');
-    }
+        $this->db = new PDO('mysql:host='.$servername.';'.'dbname='.$database.';charset=utf8', $username, $password);    }
 //------------------------------------------------------------------
     function getCategories(){
         //RETORNA DE LA DB TODAS LAS CATEGORIAS EXISTENTES. 

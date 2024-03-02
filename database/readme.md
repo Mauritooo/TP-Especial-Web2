@@ -1,0 +1,1 @@
+el archivo db_electrizante.sql debe ser compilado en la db como cofigo sql para que cree la db
